@@ -48,7 +48,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.makeorder);
 
-        int chk_id[] = {R.id.checkbox1, R.id.checkbox2, R.id.checkbox3, R.id.checkbox4, R.id.checkbox5, R.id.checkbox6, R.id.checkbox7, R.id.checkbox8, R.id.checkbox9};
+        int chk_id[] = {R.id.checkbox1, R.id.checkbox2, R.id.checkbox3, R.id.checkbox4, R.id.checkbox5, R.id.checkbox6, R.id.checkbox7, R.id.checkbox8, R.id.checkbox9, R.id.checkbox10};
         for (int id : chk_id) {
             CheckBox chk = findViewById(id);
             chk.setOnCheckedChangeListener((OnCheckedChangeListener) this);
@@ -72,10 +72,11 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         nf.setMaximumFractionDigits(2);
         for (CompoundButton chk : selected) {
             msg = "Customise your order($" + nf.format(count_num *1.9) + " each)";
-            this.setTitle("Customise your order!");
+            this.setTitle("Customise your order($" + nf.format(count_num *1.9) + " each)");
+            Toast.makeText(this, chk.getText(), Toast.LENGTH_SHORT).show();
         }
         if (msg.length() == 0) {
-            msg = "Customise your order($** each)";
+            msg = "Customise your order!";
             this.setTitle("Foodle!");
         }
 
