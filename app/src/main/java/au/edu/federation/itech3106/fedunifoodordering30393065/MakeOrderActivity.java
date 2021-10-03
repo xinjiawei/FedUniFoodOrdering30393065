@@ -1,6 +1,8 @@
 package au.edu.federation.itech3106.fedunifoodordering30393065;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +43,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
     private CheckBox checkbox9;
     private CheckBox checkbox10;
 
-    private int count_num;
+    private int count_num = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
     //------------------------------------------------------------------
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        Log.e("count_num_old", String.valueOf(count_num));
         if (isChecked) {                      //选项被选取
             selected.add(compoundButton);   //添加到集合中
             count_num += 1;
@@ -66,14 +69,41 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             selected.remove(compoundButton);//从集合中取消
             count_num -= 1;
         }
-
+        Log.e("count_num_new", String.valueOf(count_num));
         String msg = "";
+        String msg2 = "";
+        String msg20 = "";
+        String price = "";
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setMaximumFractionDigits(2);
         for (CompoundButton chk : selected) {
             msg = "Customise your order($" + nf.format(count_num *1.9) + " each)";
             this.setTitle("Customise your order($" + nf.format(count_num *1.9) + " each)");
-            Toast.makeText(this, chk.getText(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, chk.getText() + "1213", Toast.LENGTH_SHORT).show();
+            if (count_num == 1){
+                msg2 = "" + chk.getText();
+            }else{
+                msg2 += chk.getText() + ",";
+                 msg20 = msg2.substring(0, msg2.length() - 1);
+            }
+
+            //msg2 += "," + chk.getText();
+            price = nf.format(count_num *1.9);
+            //-------------------------------------------------------
+            //步骤1：创建一个SharedPreferences对象
+            SharedPreferences sharedPreferences= getSharedPreferences("data2",Context.MODE_PRIVATE);
+            //步骤2： 实例化SharedPreferences.Editor对象
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            //步骤3：将获取过来的值放入文件
+            editor.putString("1214-2.1",msg20);
+            editor.putString("1214-2.2",price);
+            editor.putInt("1214-2.3",count_num);
+            //步骤4：提交
+            editor.commit();
+            //-------------------------------------------------------
+            Log.e("1214",msg);
+            Log.e("1214",msg20);
+
         }
         if (msg.length() == 0) {
             msg = "Customise your order!";
@@ -129,6 +159,21 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox8.setChecked(true);
                 checkbox9.setChecked(true);
                 checkbox10.setChecked(true);
+                //------------------
+                //TODO OK了家人们
+                SharedPreferences sharedPreferences= getSharedPreferences("data2", Context.MODE_PRIVATE);
+                String userId1=sharedPreferences.getString("ca","");
+                String userId2=sharedPreferences.getString("ca0","");
+                Log.e("1212",userId1);
+                if (userId2 == null){
+                    Log.e("1212","userId2 is null");
+                }
+                else {
+                    Log.e("1212","userId2 is unknow");
+                }
+
+                //
+                //------------------
                 break;
             case R.id.action_settings2:
                 Toast.makeText(this, "action_settings2", Toast.LENGTH_SHORT).show();
@@ -142,6 +187,13 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox8.setChecked(false);
                 checkbox9.setChecked(false);
                 checkbox10.setChecked(false);
+                //---------------------------------
+                //步骤1：创建一个SharedPreferences对象
+                SharedPreferences sharedPreferences2= getSharedPreferences("data",Context.MODE_PRIVATE);
+                //步骤2： 实例化SharedPreferences.Editor对象
+                SharedPreferences.Editor editor = sharedPreferences2.edit();
+                editor.remove("ca");
+                editor.commit();
                 break;
             default:
                 break;
@@ -162,5 +214,15 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 Log.e("1211", sData);
             }
         }
+    }
+
+
+    public void onClickNext (View view) {
+        Log.e("1206-2", "1206-2");
+        Intent intent = new Intent(MakeOrderActivity.this,ConfirmOrderActivity.class);
+        intent.putExtra("data2","ConfirmOrderActivity,i am coming");
+        //startActivity(intent);
+        startActivityForResult(intent,request);
+
     }
 }
