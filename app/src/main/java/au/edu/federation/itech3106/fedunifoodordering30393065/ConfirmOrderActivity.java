@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,15 @@ public class ConfirmOrderActivity extends AppCompatActivity{
         Log.e("1212-2",price);
         Log.e("1214-2", String.valueOf(count));
         //-----------------------------------------------
+        this.setTitle("Confirm Order");
+        //-----------------------------------------------
+        String msg = "Extras:" + msg2;
+        TextView food = this.findViewById(R.id.textView3);
+        food.setTextSize(20);
+        food.setText(msg);
+        //-----------------------------------------------
+        Button button = (Button) findViewById(R.id.place_order);
+        button.setText("PLACE ORDER($" + price + ")");
     }
 
     //TODO can not exec, but it worked???

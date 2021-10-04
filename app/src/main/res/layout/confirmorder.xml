@@ -1,15 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Order:"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="20sp" />
+    <TextView
         android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You are order a Burger"
+        android:textStyle="bold"
+        android:layout_marginTop="290dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Extras:"
+        android:layout_marginTop="320dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="20sp" />
+    <ImageView
+        android:id="@+id/image1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TextView"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="173dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/bgm_nodata" />
+    <RadioGroup
+        android:id="@+id/extra_meal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="380dp"
+        android:layout_marginLeft="15dp">
+            <RadioButton
+                android:id="@+id/meal_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Large Meal" />
+
+            <RadioButton
+                android:id="@+id/meal_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Small Meal" />
+            <RadioButton
+                android:id="@+id/no_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Meal" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/place_order"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:onClick="onClickNext"
+        android:text="PLACE ORDER($* )">
+
+    </Button>
+</RelativeLayout>

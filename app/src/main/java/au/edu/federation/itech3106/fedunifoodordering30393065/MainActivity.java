@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         //步骤3：将获取过来的值放入文件
         editor.putString("ca","pizza");
-        editor.putInt("ids", 1);
+        editor.putInt("ids", 0);
         editor.putBoolean("isComfirm",false);
         //步骤4：提交
         editor.commit();

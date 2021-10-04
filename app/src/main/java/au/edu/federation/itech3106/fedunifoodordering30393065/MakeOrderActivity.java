@@ -81,7 +81,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             this.setTitle("Customise your order($" + nf.format(count_num *1.9) + " each)");
             //Toast.makeText(this, chk.getText() + "1213", Toast.LENGTH_SHORT).show();
             if (count_num == 1){
-                msg2 = "" + chk.getText();
+                msg20 = "" + chk.getText();
             }else{
                 msg2 += chk.getText() + ",";
                  msg20 = msg2.substring(0, msg2.length() - 1);
@@ -89,31 +89,31 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
 
             //msg2 += "," + chk.getText();
             price = nf.format(count_num *1.9);
-            //-------------------------------------------------------
-            //步骤1：创建一个SharedPreferences对象
-            SharedPreferences sharedPreferences= getSharedPreferences("data2",Context.MODE_PRIVATE);
-            //步骤2： 实例化SharedPreferences.Editor对象
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            //步骤3：将获取过来的值放入文件
-            editor.putString("1214-2.1",msg20);
-            editor.putString("1214-2.2",price);
-            editor.putInt("1214-2.3",count_num);
-            //步骤4：提交
-            editor.commit();
-            //-------------------------------------------------------
-            Log.e("1214",msg);
-            Log.e("1214",msg20);
 
         }
+        Log.e("1214", String.valueOf(count_num));
+        //-------------------------------------------------------
+        //步骤1：创建一个SharedPreferences对象
+        SharedPreferences sharedPreferences= getSharedPreferences("data2",Context.MODE_PRIVATE);
+        //步骤2： 实例化SharedPreferences.Editor对象
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //步骤3：将获取过来的值放入文件
+        editor.putString("1214-2.1",msg20);
+        editor.putString("1214-2.2",price);
+        editor.putInt("1214-2.3",count_num);
+        //步骤4：提交
+        editor.commit();
+        //
+        Log.e("1214-2.1",msg);
+        Log.e("1214-2.2",msg20);
+        //-------------------------------------------------------
         if (msg.length() == 0) {
             msg = "Customise your order!";
             this.setTitle("Foodle!");
         }
-
         TextView food = this.findViewById(R.id.text1);
         food.setTextSize(25);
         food.setText(msg);
-
     }
     //------------------------------------------------------------------
 
@@ -162,17 +162,17 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 //------------------
                 //TODO OK了家人们
                 SharedPreferences sharedPreferences= getSharedPreferences("data2", Context.MODE_PRIVATE);
-                String userId1=sharedPreferences.getString("ca","");
+                //String userId1=sharedPreferences.getString("ca","");
+                int userId1 = sharedPreferences.getInt("ids",0);
                 String userId2=sharedPreferences.getString("ca0","");
-                Log.e("1212",userId1);
+                Log.e("1206-2", String.valueOf(userId1));
                 if (userId2 == null){
-                    Log.e("1212","userId2 is null");
+                    Log.e("1206-2.1","userId2 is null");
                 }
                 else {
-                    Log.e("1212","userId2 is unknow");
+                    Log.e("1206-2.2","userId2 is unknow");
                 }
 
-                //
                 //------------------
                 break;
             case R.id.action_settings2:
