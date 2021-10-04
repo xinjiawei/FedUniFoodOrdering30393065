@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //-----------------------------------------------------
     }
     public void onClickBuger (View view) {
         Log.e("1206", "1206");
@@ -32,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent,request);
         //-------------------------------------------------------
         //步骤1：创建一个SharedPreferences对象
-        SharedPreferences sharedPreferences= getSharedPreferences("data",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences= getSharedPreferences("data2",Context.MODE_PRIVATE);
         //步骤2： 实例化SharedPreferences.Editor对象
         SharedPreferences.Editor editor = sharedPreferences.edit();
         //步骤3：将获取过来的值放入文件
-        editor.putString("ca","pizza");
+        editor.putString("ca","burger");
         editor.putInt("ids", 0);
         editor.putBoolean("isComfirm",false);
         //步骤4：提交

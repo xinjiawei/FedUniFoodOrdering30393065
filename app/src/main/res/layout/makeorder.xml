@@ -42,70 +42,70 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="@string/app_name"
+                android:text="@string/extra_1"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox2"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_2"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox3"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_3"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox4"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_4"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox5"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_5"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox6"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_6"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox7"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_7"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox8"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_8"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox9"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_9"
                 android:textSize="30sp" />
 
             <CheckBox
                 android:id="@+id/checkbox10"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="@string/extra_10"
                 android:textSize="30sp" />
         </LinearLayout>
 
@@ -120,5 +120,13 @@
         android:text="NEXT">
 
     </Button>
-
+    <TextView
+        android:id="@+id/text30393065"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:textStyle="bold"
+        android:text="stud_id:30393065"
+        android:textSize="40sp"></TextView>
 </RelativeLayout>

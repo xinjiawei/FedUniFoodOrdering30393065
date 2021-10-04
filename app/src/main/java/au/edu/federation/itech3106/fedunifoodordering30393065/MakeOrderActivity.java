@@ -1,5 +1,6 @@
 package au.edu.federation.itech3106.fedunifoodordering30393065;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -52,8 +53,8 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.makeorder);
-
-        int chk_id[] = {R.id.checkbox1, R.id.checkbox2, R.id.checkbox3, R.id.checkbox4, R.id.checkbox5, R.id.checkbox6, R.id.checkbox7, R.id.checkbox8, R.id.checkbox9, R.id.checkbox10};
+        int chk_id[] = {R.id.checkbox1, R.id.checkbox2, R.id.checkbox3, R.id.checkbox4,
+                R.id.checkbox5, R.id.checkbox6, R.id.checkbox7, R.id.checkbox8, R.id.checkbox9, R.id.checkbox10};
         for (int id : chk_id) {
             CheckBox chk = findViewById(id);
             chk.setOnCheckedChangeListener((OnCheckedChangeListener) this);

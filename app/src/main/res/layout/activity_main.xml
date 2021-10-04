@@ -16,6 +16,8 @@
         <!-- 对于父元素居中，绝对位置-->
     </TextView>
 
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,5 +65,13 @@
         android:text="HISTORY"
         android:onClick="onClickBuger">
     </Button>
-
+    <TextView
+        android:id="@+id/text30393065"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:textStyle="bold"
+        android:text="stud_id:30393065"
+        android:textSize="40sp"></TextView>
 </RelativeLayout>

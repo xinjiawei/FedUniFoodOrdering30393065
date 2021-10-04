@@ -7,5 +7,16 @@
     <string name="customise">Customise your order!</string>
     <string name="action_settings1">settings1</string>
     <string name="action_settings2">settings2</string>
-    <string name="action_settings3">settings3</string>
+
+    <string name="extra_1">banana1</string>
+    <string name="extra_2">banana2</string>
+    <string name="extra_3">banana3</string>
+    <string name="extra_4">banana4</string>
+    <string name="extra_5">banana5</string>
+    <string name="extra_6">banana6</string>
+    <string name="extra_7">banana7</string>
+    <string name="extra_8">banana8</string>
+    <string name="extra_9">banana9</string>
+    <string name="extra_10">banana10</string>
+    
 </resources>
