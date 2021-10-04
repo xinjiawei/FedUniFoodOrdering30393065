@@ -62,7 +62,6 @@
         android:textColor="#8BC34A"
         android:text="HISTORY"
         android:onClick="onClickBuger">
-
     </Button>
 
 </RelativeLayout>

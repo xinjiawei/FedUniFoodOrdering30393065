@@ -40,23 +40,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="370dp"
         android:layout_marginLeft="15dp">
             <RadioButton
                 android:id="@+id/meal_big"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Large Meal" />
+                android:layout_height="30dp"
+                android:text="Large Meal ($4.99 extra)" />
 
             <RadioButton
                 android:id="@+id/meal_small"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Small Meal" />
+                android:layout_height="30dp"
+                android:text="Small Meal($2.49 extra)" />
             <RadioButton
                 android:id="@+id/no_meal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:text="No Meal" />
     </RadioGroup>
     <Button
@@ -65,9 +65,22 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="90dp"
         android:onClick="onClickNext"
         android:text="PLACE ORDER($* )">
+    </Button>
 
+    <Button
+        android:id="@+id/cancel_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:background="#00000000"
+        android:textSize="12sp"
+        android:textColor="#8BC34A"
+        android:text="CANCEL"
+        android:onClick="onClickCancel">
     </Button>
 </RelativeLayout>
