@@ -53,7 +53,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.makeorder);
-        int chk_id[] = {R.id.checkbox1, R.id.checkbox2, R.id.checkbox3, R.id.checkbox4,
+        int[] chk_id = {R.id.checkbox1, R.id.checkbox2, R.id.checkbox3, R.id.checkbox4,
                 R.id.checkbox5, R.id.checkbox6, R.id.checkbox7, R.id.checkbox8, R.id.checkbox9, R.id.checkbox10};
         for (int id : chk_id) {
             CheckBox chk = findViewById(id);
@@ -73,15 +73,19 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         checkbox10 = (CheckBox) findViewById(R.id.checkbox10);
         //---------------------------------------------------------------
         SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
-        String ca = sharedPreferences.getString("ca", "");
-        String cas = "";
-        if (ca == "burger") {
+        String ca = sharedPreferences.getString("ca", "burger");
+        //String cas = "";
+        Log.e("1220",ca);
+        //TODO What the fuck? 异步？
+        if (ca.equals("lol0")) {
+            this.setTitle("History");
+        } else if (ca.equals("burger")) {
             this.setTitle("Ordering a Burger ($2.9)");
             checkbox1.setText("more burger meet");
-        } else if (ca == "pizza") {
+        }else if (ca.equals("pizza")) {
             this.setTitle("Ordering a Pizza ($2.9)");
             checkbox1.setText("more pinciple");
-        } else if (ca == "sundae") {
+        } else if (ca.equals("sundae")) {
             this.setTitle("Ordering a Sundae ($2.9)");
             checkbox1.setText("more ice");
         } else {
