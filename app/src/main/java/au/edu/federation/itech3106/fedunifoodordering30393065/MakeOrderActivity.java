@@ -83,7 +83,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             checkbox1.setText("more pinciple");
         } else if (ca == "sundae") {
             this.setTitle("Ordering a Sundae ($2.9)");
-            checkbox1.setText("burger ice");
+            checkbox1.setText("more ice");
         } else {
             this.setTitle("Please Ordering Someing,lol");
         }
