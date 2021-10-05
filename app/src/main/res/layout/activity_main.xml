@@ -40,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
         android:text="@string/pizza"
-        android:onClick="onClickBuger">
+        android:onClick="onClickPizza">
 
     </Button>
 
@@ -50,7 +50,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="450dp"
         android:text="@string/ice"
-        android:onClick="onClickBuger">
+        android:onClick="onClickSundaer">
 
     </Button>
 
@@ -63,7 +63,7 @@
         android:textSize="12sp"
         android:textColor="#8BC34A"
         android:text="HISTORY"
-        android:onClick="onClickBuger">
+        android:onClick="onClickHistory">
     </Button>
     <TextView
         android:id="@+id/text30393065"

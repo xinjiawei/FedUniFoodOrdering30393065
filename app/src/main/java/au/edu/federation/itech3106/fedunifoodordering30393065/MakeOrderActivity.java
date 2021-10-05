@@ -60,7 +60,33 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             chk.setOnCheckedChangeListener((OnCheckedChangeListener) this);
         }
         //this.setTitle("代码狂欢到深夜");
-        this.setTitle("Ordering a Burger ($2.9)");
+        //----------------------------------------------------------------
+        checkbox1 = (CheckBox) findViewById(R.id.checkbox1);
+        checkbox2 = (CheckBox) findViewById(R.id.checkbox2);
+        checkbox3 = (CheckBox) findViewById(R.id.checkbox3);
+        checkbox4 = (CheckBox) findViewById(R.id.checkbox4);
+        checkbox5 = (CheckBox) findViewById(R.id.checkbox5);
+        checkbox6 = (CheckBox) findViewById(R.id.checkbox6);
+        checkbox7 = (CheckBox) findViewById(R.id.checkbox7);
+        checkbox8 = (CheckBox) findViewById(R.id.checkbox8);
+        checkbox9 = (CheckBox) findViewById(R.id.checkbox9);
+        checkbox10 = (CheckBox) findViewById(R.id.checkbox10);
+        //---------------------------------------------------------------
+        SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
+        String ca = sharedPreferences.getString("ca", "");
+        String cas = "";
+        if (ca == "burger") {
+            this.setTitle("Ordering a Burger ($2.9)");
+            checkbox1.setText("more burger meet");
+        } else if (ca == "pizza") {
+            this.setTitle("Ordering a Pizza ($2.9)");
+            checkbox1.setText("more pinciple");
+        } else if (ca == "sundae") {
+            this.setTitle("Ordering a Sundae ($2.9)");
+            checkbox1.setText("more ice");
+        } else {
+            this.setTitle("Please Ordering Someing,lol");
+        }
     }
 
     //------------------------------------------------------------------
@@ -82,7 +108,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setMaximumFractionDigits(2);
         for (CompoundButton chk : selected) {
-            msg = "Customise your order($" + nf.format(count_num * 1.9) + " each)";
+            msg = "Customise your order($" + nf.format(count_num * 1.9) + " )";
             //this.setTitle("Customise your order($" + nf.format(count_num *1.9) + " each)");
             //Toast.makeText(this, chk.getText() + "1213", Toast.LENGTH_SHORT).show();
             if (count_num == 1) {
