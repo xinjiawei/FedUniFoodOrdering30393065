@@ -165,14 +165,19 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         String msg2 = sharedPreferences.getString("1214-2.1", "");
         float price = sharedPreferences.getFloat("1214-2.2", 0);
         String cas = "";
-        if (ca == "burger") {
-            cas = "Burger";
-        } else if (ca == "pizza") {
-            cas = "Pizza";
-        } else if (ca == "sundae") {
-            cas = "Sundae";
-        } else {
-            cas = "**";
+        switch (ca) {
+            case "burger":
+                cas = "Burger";
+                break;
+            case "pizza":
+                cas = "Pizza";
+                break;
+            case "sundae":
+                cas = "Sundae";
+                break;
+            default:
+                cas = "**";
+                break;
         }
         Log.e("0000", msg2);
         Log.e("0000", String.valueOf(price));

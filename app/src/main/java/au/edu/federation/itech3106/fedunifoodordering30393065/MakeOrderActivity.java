@@ -77,19 +77,22 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         //String cas = "";
         Log.e("1220",ca);
         //TODO What the fuck? 异步？
-        if (ca.equals("lol0")) {
-            this.setTitle("History");
-        } else if (ca.equals("burger")) {
-            this.setTitle("Ordering a Burger ($2.9)");
-            checkbox1.setText("more burger meet");
-        }else if (ca.equals("pizza")) {
-            this.setTitle("Ordering a Pizza ($2.9)");
-            checkbox1.setText("more pinciple");
-        } else if (ca.equals("sundae")) {
-            this.setTitle("Ordering a Sundae ($2.9)");
-            checkbox1.setText("more ice");
-        } else {
-            this.setTitle("Please Ordering Someing,lol");
+        switch (ca) {
+            case "burger":
+                this.setTitle("Ordering a Burger ($2.9)");
+                checkbox1.setText("more burger meet");
+                break;
+            case "pizza":
+                this.setTitle("Ordering a Pizza ($2.9)");
+                checkbox1.setText("more pinciple");
+                break;
+            case "sundae":
+                this.setTitle("Ordering a Sundae ($2.9)");
+                checkbox1.setText("more ice");
+                break;
+            default:
+                this.setTitle("Please Ordering Someing,lol");
+                break;
         }
     }
 
