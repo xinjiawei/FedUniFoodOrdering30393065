@@ -3,6 +3,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('D:\\0acode\\android\\FedUniFoodOrdering30393065.jks')
+            storePassword '521Xinjiawei'
+            keyAlias 'key0'
+            keyPassword '521Xinjiawei'
+        }
+    }
     compileSdk 30
 
     defaultConfig {
@@ -13,6 +21,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
