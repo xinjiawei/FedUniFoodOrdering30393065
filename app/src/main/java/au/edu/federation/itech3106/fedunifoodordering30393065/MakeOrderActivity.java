@@ -74,25 +74,65 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         //---------------------------------------------------------------
         SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
         String ca = sharedPreferences.getString("ca", "burger");
+        int reorder = sharedPreferences.getInt("reorder",0);
         //String cas = "";
         Log.e("1220",ca);
         //TODO What the fuck? 异步？
         switch (ca) {
             case "burger":
                 this.setTitle("Ordering a Burger ($2.9)");
-                checkbox1.setText("more burger meet");
+                checkbox1.setText("more burger meet1");
+                checkbox2.setText("more burger meet2");
+                checkbox3.setText("more burger meet3");
+                checkbox4.setText("more burger meet4");
+                checkbox5.setText("more burger meet5");
+                checkbox6.setText("more burger meet6");
+                for(int i = 6;i<=9;i++) {
+                    CheckBox boxid = findViewById(chk_id[i]);
+                    boxid.setVisibility(View.GONE);
+                    Log.e("1220", String.valueOf(i));
+                }
                 break;
             case "pizza":
                 this.setTitle("Ordering a Pizza ($2.9)");
-                checkbox1.setText("more pinciple");
+                checkbox1.setText("more pinciple1");
+                checkbox2.setText("more pinciple2");
+                checkbox3.setText("more pinciple3");
+                checkbox4.setText("more pinciple4");
+                for(int i = 4;i<=9;i++) {
+                    CheckBox boxid = findViewById(chk_id[i]);
+                    boxid.setVisibility(View.GONE);
+                    Log.e("1220", String.valueOf(i));
+                }
                 break;
             case "sundae":
                 this.setTitle("Ordering a Sundae ($2.9)");
-                checkbox1.setText("more ice");
+                checkbox1.setText("more ice1");
+                checkbox2.setText("more ice2");
+                checkbox3.setText("more ice3");
+                checkbox4.setText("more ice4");
+                checkbox5.setText("more ice4");
+                for(int i = 5;i<=9;i++) {
+                    CheckBox boxid = findViewById(chk_id[i]);
+                    boxid.setVisibility(View.GONE);
+                    Log.e("1220", String.valueOf(i));
+                }
                 break;
             default:
                 this.setTitle("Please Ordering Someing,lol");
                 break;
+        }
+        Log.e("1223","before:record value is set to " + reorder);
+        if (reorder == 1) {
+            for (int i = 1; i < 4; i++) {
+                checkbox1 = (CheckBox) findViewById(chk_id[i]);
+                checkbox1.setChecked(true);
+                Log.e("1224", "setcheck compulete to:" + i);
+            }
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("reorder", 0);
+            editor.commit();
+            Log.e("1223","after:record value is set to " + reorder);
         }
     }
 
@@ -150,6 +190,8 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         TextView food = this.findViewById(R.id.text1);
         food.setTextSize(25);
         food.setText(msg);
+        //TODO how to save many order historys?
+        StringBuffer stringbuffer = new StringBuffer();
     }
     //------------------------------------------------------------------
 
