@@ -287,7 +287,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == request) {
             if (data != null) {
-                String sData = data.getStringExtra("data").toString();
+                String sData = data.getStringExtra("data");
                 //sData: A，我是B,已经收到
                 Log.e("1211", sData);
             }

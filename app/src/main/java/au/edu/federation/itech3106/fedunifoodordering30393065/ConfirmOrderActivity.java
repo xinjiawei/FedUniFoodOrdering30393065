@@ -38,7 +38,6 @@ import java.util.TimerTask;
 public class ConfirmOrderActivity<price> extends AppCompatActivity {
     private static final int request = 100;
     private RadioButton Meal_Big, Meal_Small, No_Meal;
-    private static final int NOTIFICATION_ID = 1001;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -204,17 +203,18 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
                 .setSmallIcon(R.mipmap.ic_launcher_round)//不能缺少的一个属性
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(msg2))
-                .setContentIntent(back_to_main);
+                .setContentIntent(back_to_main)
+                .setAutoCancel(true);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(ca, "Notice_ohhhh", NotificationManager.IMPORTANCE_DEFAULT);
             channel.enableLights(false); //是否在桌面icon右上角展示小红点
             //channel.setLightColor(Color.GREEN); //小红点颜色
             //channel.setShowBadge(true); //是否在久按桌面图标时显示此渠道的通知
             manager.createNotificationChannel(channel);
-            builder.setChannelId(ca);
         }
 
         //-------------------------------------------------------
+        int finalHis_order = his_order;
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -222,7 +222,7 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
                 //Log.e("TimerTask", msg2);
                 Notification n = builder.build();
                 //3、manager.notify()
-                manager.notify(NOTIFICATION_ID, n);
+                manager.notify(finalHis_order, n);
             }
         };
         Timer timer = new Timer();
