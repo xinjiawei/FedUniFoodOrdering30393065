@@ -29,7 +29,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
         int i = sharedPreferences.getInt("history_order",0);
         //
         String order_his = sharedPreferences.getString("order_all","");
-        //Log.e("1226-0",order_his.get(0));
         Log.e("1226-1",order_his);
         //
         RadioButton his1 = (RadioButton) findViewById(radio_id[i]);
