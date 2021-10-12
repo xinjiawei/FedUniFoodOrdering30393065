@@ -51,7 +51,6 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         //price = price_float;
         int extra_count = sharedPreferences.getInt("1214-2.3", 1);
         String ca = sharedPreferences.getString("ca", "");
-        String order20 = sharedPreferences.getString("1214-2.4","");
         this.setTitle("Confirm Order");
         //-----------------------------------------------
         String msg = "Extras:" + msg2 + " (" + extra_count + " total)";
@@ -87,21 +86,7 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
             //RadioButton bigMeal = (RadioButton) findViewById(R.id.meal_big);
             //bigMeal.setVisibility(View.GONE);
         }
-        //===========================================================
-        //TODO order_hist Arraylist
-        int his_order_count = sharedPreferences.getInt("his_order_count", 1);
-        //初始化数组
-        ArrayList<String> order_hist = new ArrayList<>();
-        //写进数组
-        Log.e("1226-3", "his_order_count-ori :" + his_order_count);
-        Log.e("1226-3", "order-ori :" + order20);
 
-        order_hist.add(0,order20);
-        //===========================================================
-        //
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("order20", String.valueOf(order_hist));
-        editor.commit();
     }
 
     class MyRadioButtonListener implements OnCheckedChangeListener {
@@ -247,8 +232,19 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("his_order_count",his_order_count);
                 editor.commit();
-                //===========================================================
                 Log.e("1226-2", "his_order_count-new :" + his_order_count);
+                //===========================================================
+                //放到点击事件里，放到onCreate会无限叠加。
+                String order20 = sharedPreferences.getString("1214-2.4","");
+                String order_all = sharedPreferences.getString("order_all","");
+                order_all = order_all + "*" + ca + "#" + order20;
+
+                Log.e("1226-3", "order-now :" + order20);
+                Log.e("1226-3", "order-all :" + order_all);
+
+                editor.putString("order_all", String.valueOf(order_all));
+                editor.commit();
+                //===========================================================
 
 
 

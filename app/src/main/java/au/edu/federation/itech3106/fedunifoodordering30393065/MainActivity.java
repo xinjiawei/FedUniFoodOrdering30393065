@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
             //
             String order20 = "";
             editor.putString("order20",order20);
+            //
+            String str = "";
+            editor.putString("order_all",str);
+            //====================================================================
             editor.commit();
             Log.e("his_order_count", String.valueOf(his_order_count));
         }
