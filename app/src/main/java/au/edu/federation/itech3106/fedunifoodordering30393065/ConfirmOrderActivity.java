@@ -32,11 +32,13 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ConfirmOrderActivity<price> extends AppCompatActivity {
-    private static final int request = 100;
+    private static final int request = 1;
     private RadioButton Meal_Big, Meal_Small, No_Meal;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +49,18 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         String msg2 = sharedPreferences.getString("1214-2.1", "");
         float price = sharedPreferences.getFloat("1214-2.2", 0);
         //price = price_float;
-        int count = sharedPreferences.getInt("1214-2.3", 1);
+        int extra_count = sharedPreferences.getInt("1214-2.3", 1);
         String ca = sharedPreferences.getString("ca", "");
+        String order20 = sharedPreferences.getString("1214-2.4","");
         this.setTitle("Confirm Order");
         //-----------------------------------------------
-        String msg = "Extras:" + msg2 + " (" + count + " total)";
+        String msg = "Extras:" + msg2 + " (" + extra_count + " total)";
         TextView food = this.findViewById(R.id.textView3);
         food.setTextSize(20);
-        if (count >= 4 && count < 7) {
+        if (extra_count >= 4 && extra_count < 7) {
             food.setTextSize(15);
             food.setText(msg);
-        } else if (count >= 7) {
+        } else if (extra_count >= 7) {
             food.setTextSize(12);
             food.setText(msg);
         } else {
@@ -65,7 +68,7 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         }
         Log.e("1212-2.1", msg2);
         Log.e("1212-2.2", String.valueOf(price));
-        Log.e("1214-2", String.valueOf(count));
+        Log.e("1214-2", String.valueOf(extra_count));
         //-----------------------------------------------
         Button button = (Button) findViewById(R.id.place_order);
         button.setText("PLACE ORDER($" + price + ")");
@@ -84,7 +87,21 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
             //RadioButton bigMeal = (RadioButton) findViewById(R.id.meal_big);
             //bigMeal.setVisibility(View.GONE);
         }
+        //===========================================================
+        //TODO order_hist Arraylist
+        int his_order_count = sharedPreferences.getInt("his_order_count", 1);
+        //初始化数组
+        ArrayList<String> order_hist = new ArrayList<>();
+        //写进数组
+        Log.e("1226-3", "his_order_count-ori :" + his_order_count);
+        Log.e("1226-3", "order-ori :" + order20);
 
+        order_hist.add(0,order20);
+        //===========================================================
+        //
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("order20", String.valueOf(order_hist));
+        editor.commit();
     }
 
     class MyRadioButtonListener implements OnCheckedChangeListener {
@@ -148,14 +165,14 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void onClickNotice(View view) {
-        Log.e("0000", String.valueOf(System.currentTimeMillis()));
+        Log.e("currentTimeMillis", String.valueOf(System.currentTimeMillis()));
         SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
         String ca = sharedPreferences.getString("ca", "");
         String msg2 = sharedPreferences.getString("1214-2.1", "");
         float price = sharedPreferences.getFloat("1214-2.2", 0);
         int his_order = sharedPreferences.getInt("history_order",0);
         Log.e("1224", String.valueOf(his_order));
-        if(his_order < 0){
+        if(his_order < 0 || his_order > 8){
             his_order =0;
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("history_order",his_order);
@@ -218,15 +235,27 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                    //do soming
-                //Log.e("TimerTask", msg2);
                 Notification n = builder.build();
-                //3、manager.notify()
+                //3、Notification manager.notify()
                 manager.notify(finalHis_order, n);
+                //TODO Need to initile his_order_count to "0"
+                //===========================================================
+                int his_order_count;
+                his_order_count = sharedPreferences.getInt("his_order_count", 0);
+                Log.e("1226-1", "his_order_count-old :" + his_order_count);
+                his_order_count += 1;
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("his_order_count",his_order_count);
+                editor.commit();
+                //===========================================================
+                Log.e("1226-2", "his_order_count-new :" + his_order_count);
+
+
+
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 3000);//3秒后执行TimeTask的run方法
+        timer.schedule(task, 100);//3秒后执行TimeTask的run方法
         //-------------------------------------------------------
 
     }

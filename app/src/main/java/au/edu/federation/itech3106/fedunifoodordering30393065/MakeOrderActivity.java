@@ -30,10 +30,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import java.util.ArrayList;
 
 public class MakeOrderActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
-    //String sData = getIntent().getStringExtra("data").toString();
-    //sData: 我是A
     ArrayList<CompoundButton> selected = new ArrayList<>();
-    private static final int request = 100;
+    private static final int request = 1;
     private static final int result = 200;
 
     private CheckBox checkbox1;
@@ -122,18 +120,30 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 this.setTitle("Please Ordering Someing,lol");
                 break;
         }
+        // check if order history
         Log.e("1223","before:record value is set to " + reorder);
         if (reorder == 1) {
             for (int i = 1; i < 4; i++) {
+                //===========================================================
                 checkbox1 = (CheckBox) findViewById(chk_id[i]);
                 checkbox1.setChecked(true);
                 Log.e("1224", "setcheck compulete to:" + i);
+                //===========================================================
             }
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("reorder", 0);
             editor.commit();
             Log.e("1223","after:record value is set to " + reorder);
         }
+        //TODO is apk started just now?
+        Intent intent_backcode = new Intent();
+        intent_backcode.putExtra("back_code_string","back_code_string:3");
+        setResult(2,intent_backcode);
+        //
+        Intent intent_get_request_code = getIntent();
+        String values = intent_get_request_code.getStringExtra("data");
+        Log.e("intent2",values);
+        //
     }
 
     //------------------------------------------------------------------
@@ -148,9 +158,12 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             count_num -= 1;
         }
         Log.e("count_num_new", String.valueOf(count_num));
+        //ArrayList<String> order_hist = new ArrayList<>();
         String msg = "";
         String msg2 = "";
         String msg20 = "";
+        String order2 = "";
+        String order20 = "";
         double price = 0;
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setMaximumFractionDigits(2);
@@ -160,12 +173,32 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             //Toast.makeText(this, chk.getText() + "1213", Toast.LENGTH_SHORT).show();
             if (count_num == 1) {
                 msg20 = "" + chk.getText();
+                //extra food in every order
+                order2 = "" + chk.getId();
+                order20 = "" + order2;
+                //order_hist.add(order20);
+                Log.e("1225-1", order20);
+
             } else {
                 msg2 += chk.getText() + ",";
                 msg20 = msg2.substring(0, msg2.length() - 1);
+                //extra food in every order
+                order2 += chk.getId() + ",";
+                order20 = order2.substring(0, order2.length() - 1);
+                //order_hist.add(order20);
+                Log.e("1225-2", order20);
             }
             //msg2 += "," + chk.getText();
         }
+        //TODO Avrrylist ?
+        /*
+        order_hist.add(order20);
+        order_hist.add(1,order20);
+        Log.e("1226-0",order_hist.get(0));
+        Log.e("1226-1",order_hist.get(1));
+
+         */
+        //
         double base_price = 2.9;
         price = base_price + Double.parseDouble(nf.format(count_num * 1.9));
         Log.e("1214", String.valueOf(count_num));
@@ -176,6 +209,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         SharedPreferences.Editor editor = sharedPreferences.edit();
         //步骤3：将获取过来的值放入文件
         editor.putString("1214-2.1", msg20);
+        editor.putString("1214-2.4",order20);
         editor.putFloat("1214-2.2", (float) price);
         editor.putInt("1214-2.3", count_num);
         //步骤4：提交
@@ -190,8 +224,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         TextView food = this.findViewById(R.id.text1);
         food.setTextSize(25);
         food.setText(msg);
-        //TODO how to save many order historys?
-        StringBuffer stringbuffer = new StringBuffer();
     }
     //------------------------------------------------------------------
 
@@ -305,8 +337,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             return defaultValue;
         }
     }
-
-
 
     public void onClickNext(View view) {
         Log.e("1206-2", "1206-2");

@@ -11,6 +11,10 @@ import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
+
 public class OrderHistoryActivity extends AppCompatActivity {
     private static final int request = 100;
     @Override
@@ -24,8 +28,22 @@ public class OrderHistoryActivity extends AppCompatActivity {
         String msg3 = sharedPreferences.getString("1214-2.1","");
         int i = sharedPreferences.getInt("history_order",0);
         //
+        String order_his = sharedPreferences.getString("order20","");
+        //Log.e("1226-0",order_his.get(0));
+        Log.e("1226-1",order_his);
+        //
         RadioButton his1 = (RadioButton) findViewById(radio_id[i]);
         his1.setText("Extras:" + msg3);
+
+        //TODO is apk started just now?
+        Intent intent_backcode = new Intent();
+        intent_backcode.putExtra("back_code_string","back_code_string:3");
+        setResult(2,intent_backcode);
+        //
+        Intent intent_get_request_code = getIntent();
+        String values = intent_get_request_code.getStringExtra("data");
+        Log.e("intent2",values);
+        //
     }
 
     public void onClickHistoryConfirm (View view) {
@@ -34,7 +52,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         Intent intent = new Intent(OrderHistoryActivity.this,MakeOrderActivity.class);
         intent.putExtra("data","this is OrderHistoryActivity");
         startActivityForResult(intent,request);
-        //-------------------------------------------------------
+        //-----------------------------------------------------
         SharedPreferences sharedPreferences= getSharedPreferences("data2", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("reorder",1);
