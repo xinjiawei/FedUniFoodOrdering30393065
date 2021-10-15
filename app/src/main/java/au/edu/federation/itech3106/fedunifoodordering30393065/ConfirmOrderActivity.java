@@ -53,6 +53,24 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         String ca = sharedPreferences.getString("ca", "");
         this.setTitle("Confirm Order");
         //-----------------------------------------------
+        String cas = "";
+        TextView foodcas = this.findViewById(R.id.textView2);
+        switch (ca) {
+            case "burger":
+                cas = "Burger";
+                break;
+            case "pizza":
+                cas = "Pizza";
+                break;
+            case "sundae":
+                cas = "Sundae";
+                break;
+            default:
+                cas = "**";
+                break;
+        }
+        foodcas.setText("You are order a " + cas);
+        //
         String msg = "Extras:" + msg2 + " (" + extra_count + " total)";
         TextView food = this.findViewById(R.id.textView3);
         food.setTextSize(20);
@@ -129,7 +147,7 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         }
     }
 
-    //TODO can not exec, but it worked???
+    //0TODO can not exec, but it worked???
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e("1211-3", "1211-3");
@@ -155,6 +173,7 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         String ca = sharedPreferences.getString("ca", "");
         String msg2 = sharedPreferences.getString("1214-2.1", "");
         float price = sharedPreferences.getFloat("1214-2.2", 0);
+
         int his_order = sharedPreferences.getInt("history_order",0);
         Log.e("1224", String.valueOf(his_order));
         if(his_order < 0 || his_order > 8){
@@ -223,7 +242,8 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
                 Notification n = builder.build();
                 //3、Notification manager.notify()
                 manager.notify(finalHis_order, n);
-                //TODO Need to initile his_order_count to "0"
+                //0TODO Need to initile his_order_count to "0"++不再需要了
+                //还需要啊混蛋，历史订单那里排序还需要。
                 //===========================================================
                 int his_order_count;
                 his_order_count = sharedPreferences.getInt("his_order_count", 0);
@@ -237,7 +257,7 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
                 //放到点击事件里，放到onCreate会无限叠加。
                 String order20 = sharedPreferences.getString("1214-2.4","");
                 String order_all = sharedPreferences.getString("order_all","");
-                order_all = order_all + "*" + ca + "#" + order20;
+                order_all = order_all + "*" + ca + "#" + order20 + "@";
 
                 Log.e("1226-3", "order-now :" + order20);
                 Log.e("1226-3", "order-all :" + order_all);

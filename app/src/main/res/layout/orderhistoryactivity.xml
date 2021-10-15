@@ -5,7 +5,7 @@
     android:orientation="horizontal">
 
     <RadioGroup
-        android:id="@+id/extra_meal"
+        android:id="@+id/historygroup"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginLeft="15dp"
@@ -66,7 +66,7 @@
             android:text="" />
     </RadioGroup>
     <Button
-        android:id="@+id/place_order"
+        android:id="@+id/place_order2"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

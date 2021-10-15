@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
@@ -28,6 +29,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MakeOrderActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     ArrayList<CompoundButton> selected = new ArrayList<>();
@@ -53,6 +56,8 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         setContentView(R.layout.makeorder);
         int[] chk_id = {R.id.checkbox1, R.id.checkbox2, R.id.checkbox3, R.id.checkbox4,
                 R.id.checkbox5, R.id.checkbox6, R.id.checkbox7, R.id.checkbox8, R.id.checkbox9, R.id.checkbox10};
+        SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         for (int id : chk_id) {
             CheckBox chk = findViewById(id);
             chk.setOnCheckedChangeListener((OnCheckedChangeListener) this);
@@ -70,12 +75,93 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         checkbox9 = (CheckBox) findViewById(R.id.checkbox9);
         checkbox10 = (CheckBox) findViewById(R.id.checkbox10);
         //---------------------------------------------------------------
-        SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
-        String ca = sharedPreferences.getString("ca", "burger");
+        //check if order history
         int reorder = sharedPreferences.getInt("reorder",0);
+        Log.e("1223","before:record value is set to " + reorder);
+        String ca = "";
+        if (reorder == 1) {
+            String reorderlist = sharedPreferences.getString("reorder_list", "");
+            /*
+            for (int i = 1; i < 4; i++) {
+                //===========================================================
+                checkbox1 = (CheckBox) findViewById(chk_id[i]);
+                checkbox1.setChecked(true);
+                Log.e("1224", "setcheck compulete to:" + i);
+                //===========================================================
+            }
+             */
+            Log.e("reorder_list",reorderlist);
+            //截取
+            String rgex = "(\\*).*?(@)";
+            String rgex2 = ".*?(?=,E)";//匹配之前所有字符
+            String rgex3 = "([^:]+)$";//匹配之后所有字符
+            String rgex4 = "(?<=,).*?(?=,)";
+            String str = reorderlist;
+
+            Pattern p1 = Pattern.compile(rgex2); //编译对象
+            Pattern p2 = Pattern.compile(rgex3);
+            Pattern p3 = Pattern.compile(rgex4);
+
+            Matcher m1 = p1.matcher(str); //进行匹配
+            Matcher m2 = p2.matcher(str);
+
+            while(m1.find()) {
+                Log.e("1235-1",m1.group());//默认是group(0)
+                ca = "" +m1.group();
+                editor.putString("ca",ca);
+                editor.commit();
+                Log.e("1235-1.1",ca);
+                while(m2.find()) {
+                    Log.e("1235-2",m2.group());//默认是group(0)
+                    String reorderlist_ex = "," + m2.group() + ",";
+                    Matcher m3 = p3.matcher(reorderlist_ex);
+                    while(m3.find()) {
+                        Log.e("1235-3",m3.group());
+                        //checkbox1.setChecked(true);
+
+                        switch (m3.group()) {
+                            case "2131230819":
+                                checkbox1.setChecked(true);
+                            case "2131230821":
+                                checkbox2.setChecked(true);
+                            case "2131230822":
+                                checkbox3.setChecked(true);
+                            case "2131230823":
+                                checkbox4.setChecked(true);
+                            case "2131230824":
+                                checkbox5.setChecked(true);
+                            case "2131230825":
+                                checkbox6.setChecked(true);
+                            case "2131230826":
+                                checkbox7.setChecked(true);
+                            default:
+                                break;
+                        }
+
+
+                    }
+                }
+            }
+
+            //TODO 正则匹配获取传过来的checkbox id，获取id的数量，然后for循环选中，之后
+            // 清空shareP，或者直接用intent
+            //还需要checkboxid 转化成chk_id，可能，if语句实现吧
+            //重新初始化
+            editor.putInt("reorder", 0);
+            editor.putString("reorder_list","");
+            editor.commit();
+            Log.e("1223","after:record value is set to " + reorder);
+
+            //最后设置就有效
+            //ca = "pizza";
+            //TODO 离谱，离大谱
+        }
+
+        ca = sharedPreferences.getString("ca", "burger");
         //String cas = "";
-        Log.e("1220",ca);
-        //TODO What the fuck? 异步？
+        Log.e("1220-3","now ca is :" + ca);
+        //What the fuck? 异步？
+        //已解决，if的原因，java的一些特性。
         switch (ca) {
             case "burger":
                 this.setTitle("Ordering a Burger ($2.9)");
@@ -88,7 +174,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 for(int i = 6;i<=9;i++) {
                     CheckBox boxid = findViewById(chk_id[i]);
                     boxid.setVisibility(View.GONE);
-                    Log.e("1220", String.valueOf(i));
+                    Log.e("1220-1", String.valueOf(i));
                 }
                 break;
             case "pizza":
@@ -100,7 +186,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 for(int i = 4;i<=9;i++) {
                     CheckBox boxid = findViewById(chk_id[i]);
                     boxid.setVisibility(View.GONE);
-                    Log.e("1220", String.valueOf(i));
+                    Log.e("1220-2", String.valueOf(i));
                 }
                 break;
             case "sundae":
@@ -113,29 +199,16 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 for(int i = 5;i<=9;i++) {
                     CheckBox boxid = findViewById(chk_id[i]);
                     boxid.setVisibility(View.GONE);
-                    Log.e("1220", String.valueOf(i));
+                    Log.e("1220-3", String.valueOf(i));
                 }
                 break;
             default:
-                this.setTitle("Please Ordering Someing,lol");
+                this.setTitle("Please Ordering Someing,loll");
+                Log.e("1220-", "ca is"+ ca + "");
                 break;
         }
-        // check if order history
-        Log.e("1223","before:record value is set to " + reorder);
-        if (reorder == 1) {
-            for (int i = 1; i < 4; i++) {
-                //===========================================================
-                checkbox1 = (CheckBox) findViewById(chk_id[i]);
-                checkbox1.setChecked(true);
-                Log.e("1224", "setcheck compulete to:" + i);
-                //===========================================================
-            }
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("reorder", 0);
-            editor.commit();
-            Log.e("1223","after:record value is set to " + reorder);
-        }
-        //TODO is apk started just now?
+
+        //justify is apk started just now?
         Intent intent_backcode = new Intent();
         intent_backcode.putExtra("back_code_string","back_code_string:3");
         setResult(2,intent_backcode);
@@ -184,13 +257,16 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 msg20 = msg2.substring(0, msg2.length() - 1);
                 //extra food in every order
                 order2 += chk.getId() + ",";
+                //@不能在这里加，因为当只选一个小菜的时候会删掉@...
+                //order20 = order2.substring(0, order2.length() - 1) + "@";
                 order20 = order2.substring(0, order2.length() - 1);
                 //order_hist.add(order20);
                 Log.e("1225-2", order20);
             }
             //msg2 += "," + chk.getText();
         }
-        //TODO Avrrylist ?
+        //Avrrylist ?
+        //no ,不用arraylist，shareP传不过去直接，所以用正则了
         /*
         order_hist.add(order20);
         order_hist.add(1,order20);
@@ -215,8 +291,9 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         //步骤4：提交
         editor.commit();
         //
-        Log.e("1214-2.1", msg);
-        Log.e("1214-2.2", msg20);
+        Log.e("1214-2.1.msg", msg);
+        Log.e("1214-2.2.msg20", msg20);
+        Log.e("1214-2.3.order20", order20);
         //-------------------------------------------------------
         if (msg.length() == 0) {
             msg = "Customise your order!";
@@ -270,9 +347,11 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox9.setChecked(true);
                 checkbox10.setChecked(true);
                 //------------------
-                //TODO OK了家人们
+                //OK了家人们：
+                // 刚开始有进展的时候写了这句话
                 SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
                 //String userId1=sharedPreferences.getString("ca","");
+                /*
                 int userId1 = sharedPreferences.getInt("ids", 0);
                 String userId2 = sharedPreferences.getString("ca0", "");
                 Log.e("1206-2", String.valueOf(userId1));
@@ -281,6 +360,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 } else {
                     Log.e("1206-2.2", "userId2 is unknow");
                 }
+                */
 
                 //------------------
                 break;
@@ -312,7 +392,8 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         //-----------------------------------------------
     }
 
-    //TODO can not exec, but it worked???
+    //can not exec, but it worked???
+    //已解决，接收的问题，接收的activity在后台，除了toast，Log.e不显示。
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e("1211", "1211");
