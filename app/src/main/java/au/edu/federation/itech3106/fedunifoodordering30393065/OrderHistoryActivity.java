@@ -10,18 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,15 +46,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
             Log.e("1220", String.valueOf(i0));
         }
 
-        //查找是否有这个字符串。
-        /*
-        String pattern = ".*12.*";
-        boolean isMatch = Pattern.matches(pattern, order_his);
-        Log.e("1231-1", String.valueOf(isMatch));
-
-         */
-        //加载历史页面
-        //截取
         String rgex = "(\\*).*?(@)";
         String rgex2 = "(?<=\\*).*?(?=\\@)";
         String rgex3 = "(?<=\\*).*?(?=#)";
@@ -67,11 +53,11 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         String str = order_his;
 
-        Pattern p = Pattern.compile(rgex); //编译对象
+        Pattern p = Pattern.compile(rgex);
         Pattern p2 = Pattern.compile(rgex3);
         Pattern p3 = Pattern.compile(rgex4);
 
-        Matcher m = p.matcher(str); //进行匹配
+        Matcher m = p.matcher(str);
 
         Log.e("9999-1", String.valueOf(i));
         Log.e("9999-2", String.valueOf(his_order_count));
@@ -80,7 +66,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         ArrayList order_his_arraylist =new ArrayList();
 
         while(m.find()) {
-            Log.e("1231-2.1",m.group());//默认是group(0)
+            Log.e("1231-2.1",m.group());
 
             Matcher m2 = p2.matcher(m.group());
             Matcher m3 = p3.matcher(m.group());
@@ -98,8 +84,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
             Log.e("9999-3", "his_order_count is " + String.valueOf(his_order_count));
         }
         Log.e("0000", String.valueOf(order_his_arraylist.toString()));
-        //Log.e("0002", String.valueOf(order_his_arraylist.get(0)));
-        //Log.e("0003", String.valueOf(order_his_arraylist.get(1)));
 
         //转置列表
         StringBuilder out_order_his = new StringBuilder();
@@ -118,12 +102,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
             boxid.setVisibility(View.VISIBLE);
             Log.e("1232-2", String.valueOf(i0));
         }
-
-        //TODO 准备操作这个正则字符串，分割之后再机甲归位。
-        //没有归位的机甲单选框先隐藏掉，总共九个。
-        //再开一个数组记录，等等
-        //显示的文本好像就是订单记录
-        //这边可能也需要转义了...
 
         //backcode: is apk started just now?
         Intent intent_backcode = new Intent();
@@ -153,7 +131,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
             editor.commit();
             //-----------------------------------------------------
             startActivityForResult(intent,request);
-            //不能刷新
             // refresh();
         }
     }
@@ -174,17 +151,12 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         Log.e("1209", String.valueOf(item));
         SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
         String out_order_his = sharedPreferences.getString("out_order_his","");
         String order_his = sharedPreferences.getString("order_all","");
         int his_order_count = sharedPreferences.getInt("his_order_count", 0);
         Log.e("1234", String.valueOf(out_order_his));
-
-        //截取
         String rgex = "(\\*).*?(@)";
         String rgex2 = "(?<=\\*).*?(?=\\@)";
         String rgex3 = "(?<=\\*).*?(?=#)";
@@ -194,8 +166,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
         Pattern p2 = Pattern.compile(rgex3);
         Pattern p3 = Pattern.compile(rgex4);
 
-
-
         Log.e("9999-2", String.valueOf(his_order_count));
         int i1 = 0;
         //String out_order_his = "";
@@ -203,12 +173,11 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_settings3:
-                //Toast.makeText(this, "action_settings1", Toast.LENGTH_SHORT).show();
                 //
                 String str1 = out_order_his;
-                Matcher o_m = p.matcher(str1); //进行匹配
+                Matcher o_m = p.matcher(str1);
                 while(o_m.find()) {
-                    Log.e("1231-2.1",o_m.group());//默认是group(0)
+                    Log.e("1231-2.1",o_m.group());
 
                     Matcher m2 = p2.matcher(o_m.group());
                     Matcher m3 = p3.matcher(o_m.group());
@@ -223,7 +192,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     }
                     order_his_arraylist.add(i1,o_m.group());
                     i1 += 1;
-                    //Log.e("1232-2", "find cycle is " + String.valueOf(i1));
                     Log.e("9999-3", "his_order_count is " + String.valueOf(his_order_count));
                 }
 
@@ -232,9 +200,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 Toast.makeText(this, "action_settings2", Toast.LENGTH_SHORT).show();
                 //
                 String str2 = order_his;
-                Matcher m = p.matcher(str2); //进行匹配
+                Matcher m = p.matcher(str2);
                 while(m.find()) {
-                    Log.e("1231-2.1",m.group());//默认是group(0)
+                    Log.e("1231-2.1",m.group());
 
                     Matcher m2 = p2.matcher(m.group());
                     Matcher m3 = p3.matcher(m.group());
@@ -352,7 +320,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 default:
                     throw new IllegalStateException("Unexpected value: " + checkedId);
             }
-            //步骤4：提交
 
         }
 

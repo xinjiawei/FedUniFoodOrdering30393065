@@ -8,17 +8,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -26,14 +20,10 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -95,14 +85,10 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
             Meal_Big = (RadioButton) findViewById(R.id.meal_big);
             Meal_Small = (RadioButton) findViewById(R.id.meal_small);
             No_Meal = (RadioButton) findViewById(R.id.no_meal);
-            //注意是给RadioGroup绑定监视器
             rg.setOnCheckedChangeListener(new MyRadioButtonListener());
         }else {
             RadioGroup myRadioGroup = (RadioGroup) findViewById(R.id.extra_meal);
             myRadioGroup.setVisibility(View.GONE);
-
-            //RadioButton bigMeal = (RadioButton) findViewById(R.id.meal_big);
-            //bigMeal.setVisibility(View.GONE);
         }
 
     }
@@ -114,11 +100,8 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
             float price = sharedPreferences.getFloat("1214-2.2", 0);
             //-------------------------------------------------------
-            //步骤1：创建一个SharedPreferences对象
             SharedPreferences sharedPreferences_setpri = getSharedPreferences("data2", Context.MODE_PRIVATE);
-            //步骤2： 实例化SharedPreferences.Editor对象
             SharedPreferences.Editor editor = sharedPreferences_setpri.edit();
-            // 选中状态改变时被触发
             NumberFormat nf = NumberFormat.getNumberInstance();
             nf.setMaximumFractionDigits(2);
             double extra_price;
@@ -147,7 +130,6 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         }
     }
 
-    //0TODO can not exec, but it worked???
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e("1211-3", "1211-3");
@@ -155,7 +137,6 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         if (requestCode == request) {
             if (data != null) {
                 String sData = data.getStringExtra("data").toString();
-                //sData: A，我是B,已经收到
                 Log.e("1211-3", sData);
             }
         }
@@ -210,41 +191,29 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
         //
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent back_to_main = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        //----------------------1、NotificationManager----------------------------
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        /** 2、Builder->Notification
-         *  必要属性有三项
-         *  小图标，通过 setSmallIcon() 方法设置
-         *  标题，通过 setContentTitle() 方法设置
-         *  内容，通过 setContentText() 方法设置*/
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,ca);
         builder
-                .setContentText(msg2)//设置通知内容
-                .setContentTitle(cas + " Ready!")//设置通知标题
-                .setSmallIcon(R.mipmap.ic_launcher_round)//不能缺少的一个属性
+                .setContentText(msg2)
+                .setContentTitle(cas + " Ready!")
+                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(msg2))
                 .setContentIntent(back_to_main)
                 .setAutoCancel(true);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(ca, "Notice_ohhhh", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.enableLights(false); //是否在桌面icon右上角展示小红点
-            //channel.setLightColor(Color.GREEN); //小红点颜色
-            //channel.setShowBadge(true); //是否在久按桌面图标时显示此渠道的通知
+            channel.enableLights(false);
             manager.createNotificationChannel(channel);
         }
 
-        //-------------------------------------------------------
         int finalHis_order = his_order;
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 Notification n = builder.build();
-                //3、Notification manager.notify()
                 manager.notify(finalHis_order, n);
                 //0TODO Need to initile his_order_count to "0"++不再需要了
-                //还需要啊混蛋，历史订单那里排序还需要。
-                //===========================================================
                 int his_order_count;
                 his_order_count = sharedPreferences.getInt("his_order_count", 0);
                 Log.e("1226-1", "his_order_count-old :" + his_order_count);
@@ -254,7 +223,6 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
                 editor.commit();
                 Log.e("1226-2", "his_order_count-new :" + his_order_count);
                 //===========================================================
-                //放到点击事件里，放到onCreate会无限叠加。
                 String order20 = sharedPreferences.getString("1214-2.4","");
                 String order_all = sharedPreferences.getString("order_all","");
                 order_all = order_all + "*" + ca + "#" + order20 + "@";
@@ -271,7 +239,7 @@ public class ConfirmOrderActivity<price> extends AppCompatActivity {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 100);//3秒后执行TimeTask的run方法
+        timer.schedule(task, 2000);//3秒后执行TimeTask的run方法
         //-------------------------------------------------------
 
     }

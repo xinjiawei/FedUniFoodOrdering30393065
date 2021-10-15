@@ -54,7 +54,7 @@
                 android:id="@+id/meal_small"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="@string/no_meal" />
+                android:text="@string/small_meal" />
             <RadioButton
                 android:id="@+id/no_meal"
                 android:layout_width="wrap_content"
