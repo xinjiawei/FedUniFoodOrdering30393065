@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             //====================================================================
             editor.commit();
             Log.e("his_order_count", String.valueOf(his_order_count));
-            Toast.makeText(this, "initlize!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "initlize!", Toast.LENGTH_SHORT).show();
         }
         //reorder_list其实应该返回主页面就置空，因为通过判断reorder_list是否为空来决定重新点单按钮的使能，
         // 如果不置空，有时用户选择了历史订单，但是不提交反而返回主页面。如果再次回到历史订单页面

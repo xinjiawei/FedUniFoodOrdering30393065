@@ -11,6 +11,7 @@
         android:text="Your Order:"
         android:layout_marginTop="260dp"
         android:layout_marginLeft="15dp"
+        android:layout_centerHorizontal="true"
         android:textSize="20sp" />
     <TextView
         android:id="@+id/textView2"
@@ -31,10 +32,11 @@
         android:textSize="20sp" />
     <ImageView
         android:id="@+id/image1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
         android:layout_marginTop="60dp"
-        android:background="@drawable/bgm_nodata" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/dollar" />
     <RadioGroup
         android:id="@+id/extra_meal"
         android:layout_width="wrap_content"
@@ -83,13 +85,4 @@
         android:text="CANCEL"
         android:onClick="onClickCancel">
     </Button>
-    <TextView
-        android:id="@+id/text30393065"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:textStyle="bold"
-        android:text="stud_id:30393065"
-        android:textSize="40sp"></TextView>
 </RelativeLayout>

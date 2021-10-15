@@ -156,7 +156,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
             //不能刷新
             // refresh();
         }
-
     }
     //------------------------------------------------------------------
 
@@ -167,7 +166,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_history, menu);
 
         Log.e("1207-2", "1207-2");
         return true;
@@ -203,8 +202,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
         ArrayList order_his_arraylist =new ArrayList();
 
         switch (item.getItemId()) {
-            case R.id.action_settings1:
-                Toast.makeText(this, "action_settings1", Toast.LENGTH_SHORT).show();
+            case R.id.action_settings3:
+                //Toast.makeText(this, "action_settings1", Toast.LENGTH_SHORT).show();
                 //
                 String str1 = out_order_his;
                 Matcher o_m = p.matcher(str1); //进行匹配
@@ -229,7 +228,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 }
 
                 break;
-            case R.id.action_settings2:
+            case R.id.action_settings4:
                 Toast.makeText(this, "action_settings2", Toast.LENGTH_SHORT).show();
                 //
                 String str2 = order_his;

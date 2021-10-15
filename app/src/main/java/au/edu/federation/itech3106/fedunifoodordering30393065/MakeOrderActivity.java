@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
@@ -74,6 +75,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         checkbox8 = (CheckBox) findViewById(R.id.checkbox8);
         checkbox9 = (CheckBox) findViewById(R.id.checkbox9);
         checkbox10 = (CheckBox) findViewById(R.id.checkbox10);
+        ImageView setimg = (ImageView) findViewById(R.id.image1);
         //---------------------------------------------------------------
         //check if order history
         int reorder = sharedPreferences.getInt("reorder",0);
@@ -117,7 +119,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 //editor.putString("ca",ca);
                 //editor.commit();
                 Log.e("1235-1.1","ca instant is " + ca);
-
 
                 while(m2.find()) {
                     Log.e("1235-2",m2.group());//默认是group(0)
@@ -191,13 +192,14 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         //已解决，if的原因，java的一些特性。
         switch (ca) {
             case "burger":
+                setimg.setImageResource(R.drawable.hanber);
                 this.setTitle("Ordering a Burger ($2.9)");
-                checkbox1.setText("more burger meet1");
-                checkbox2.setText("more burger meet2");
-                checkbox3.setText("more burger meet3");
-                checkbox4.setText("more burger meet4");
-                checkbox5.setText("more burger meet5");
-                checkbox6.setText("more burger meet6");
+                checkbox1.setText("A egg");
+                checkbox2.setText("Pork");
+                checkbox3.setText("Cheese");
+                checkbox4.setText("Beef");
+                checkbox5.setText("Sausage");
+                checkbox6.setText("Lettuce");
                 for(int i = 6;i<=9;i++) {
                     CheckBox boxid = findViewById(chk_id[i]);
                     boxid.setVisibility(View.GONE);
@@ -205,12 +207,15 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 }
                 break;
             case "pizza":
+                setimg.setImageResource(R.drawable.pizza);
                 this.setTitle("Ordering a Pizza ($2.9)");
-                checkbox1.setText("more pinciple1");
-                checkbox2.setText("more pinciple2");
-                checkbox3.setText("more pinciple3");
-                checkbox4.setText("more pinciple4");
-                for(int i = 4;i<=9;i++) {
+                checkbox1.setText("Tomato");
+                checkbox2.setText("Bacon piece");
+                checkbox3.setText("Olive");
+                checkbox4.setText("Beef piece");
+                checkbox5.setText("Pinciple");
+                checkbox6.setText("Burgermeet");
+                for(int i = 6;i<=9;i++) {
                     CheckBox boxid = findViewById(chk_id[i]);
                     boxid.setVisibility(View.GONE);
                     Log.e("1220-2", String.valueOf(i));
@@ -218,12 +223,14 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 break;
             case "sundae":
                 this.setTitle("Ordering a Sundae ($2.9)");
-                checkbox1.setText("more ice1");
-                checkbox2.setText("more ice2");
-                checkbox3.setText("more ice3");
-                checkbox4.setText("more ice4");
-                checkbox5.setText("more ice5");
-                for(int i = 5;i<=9;i++) {
+                setimg.setImageResource(R.drawable.sunda);
+                checkbox1.setText("Banana");
+                checkbox2.setText("Caramel Sauce");
+                checkbox3.setText("Chopped Nuts");
+                checkbox4.setText("More ice");
+                checkbox5.setText("Pinciple");
+                checkbox6.setText("Strawberry");
+                for(int i = 6;i<=9;i++) {
                     CheckBox boxid = findViewById(chk_id[i]);
                     boxid.setVisibility(View.GONE);
                     Log.e("1220-3", String.valueOf(i));
@@ -362,7 +369,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
             case R.id.action_settings1:
-                Toast.makeText(this, "action_settings1", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "action_settings1", Toast.LENGTH_SHORT).show();
                 checkbox1.setChecked(true);
                 checkbox2.setChecked(true);
                 checkbox3.setChecked(true);
@@ -392,7 +399,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 //------------------
                 break;
             case R.id.action_settings2:
-                Toast.makeText(this, "action_settings2", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "action_settings2", Toast.LENGTH_SHORT).show();
                 checkbox1.setChecked(false);
                 checkbox2.setChecked(false);
                 checkbox3.setChecked(false);
