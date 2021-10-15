@@ -56,7 +56,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.makeorder);
         int[] chk_id = {R.id.checkbox1, R.id.checkbox2, R.id.checkbox3, R.id.checkbox4,
-                R.id.checkbox5, R.id.checkbox6, R.id.checkbox7, R.id.checkbox8, R.id.checkbox9, R.id.checkbox10};
+                R.id.checkbox5, R.id.checkbox6};
         SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         for (int id : chk_id) {
@@ -71,10 +71,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         checkbox4 = (CheckBox) findViewById(R.id.checkbox4);
         checkbox5 = (CheckBox) findViewById(R.id.checkbox5);
         checkbox6 = (CheckBox) findViewById(R.id.checkbox6);
-        checkbox7 = (CheckBox) findViewById(R.id.checkbox7);
-        checkbox8 = (CheckBox) findViewById(R.id.checkbox8);
-        checkbox9 = (CheckBox) findViewById(R.id.checkbox9);
-        checkbox10 = (CheckBox) findViewById(R.id.checkbox10);
         ImageView setimg = (ImageView) findViewById(R.id.image1);
         //---------------------------------------------------------------
         //check if order history
@@ -200,11 +196,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox4.setText("Beef");
                 checkbox5.setText("Sausage");
                 checkbox6.setText("Lettuce");
-                for(int i = 6;i<=9;i++) {
-                    CheckBox boxid = findViewById(chk_id[i]);
-                    boxid.setVisibility(View.GONE);
-                    Log.e("1220-1", String.valueOf(i));
-                }
                 break;
             case "pizza":
                 setimg.setImageResource(R.drawable.pizza);
@@ -215,11 +206,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox4.setText("Beef piece");
                 checkbox5.setText("Pinciple");
                 checkbox6.setText("Burgermeet");
-                for(int i = 6;i<=9;i++) {
-                    CheckBox boxid = findViewById(chk_id[i]);
-                    boxid.setVisibility(View.GONE);
-                    Log.e("1220-2", String.valueOf(i));
-                }
                 break;
             case "sundae":
                 this.setTitle("Ordering a Sundae ($2.9)");
@@ -230,11 +216,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox4.setText("More ice");
                 checkbox5.setText("Pinciple");
                 checkbox6.setText("Strawberry");
-                for(int i = 6;i<=9;i++) {
-                    CheckBox boxid = findViewById(chk_id[i]);
-                    boxid.setVisibility(View.GONE);
-                    Log.e("1220-3", String.valueOf(i));
-                }
                 break;
             default:
                 this.setTitle("Please Ordering Someing,loll");
@@ -359,10 +340,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         checkbox4 = (CheckBox) findViewById(R.id.checkbox4);
         checkbox5 = (CheckBox) findViewById(R.id.checkbox5);
         checkbox6 = (CheckBox) findViewById(R.id.checkbox6);
-        checkbox7 = (CheckBox) findViewById(R.id.checkbox7);
-        checkbox8 = (CheckBox) findViewById(R.id.checkbox8);
-        checkbox9 = (CheckBox) findViewById(R.id.checkbox9);
-        checkbox10 = (CheckBox) findViewById(R.id.checkbox10);
         //---------------------------------------------------------------
         Log.e("1209", String.valueOf(item));
 
@@ -376,27 +353,11 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox4.setChecked(true);
                 checkbox5.setChecked(true);
                 checkbox6.setChecked(true);
-                checkbox7.setChecked(true);
-                checkbox8.setChecked(true);
-                checkbox9.setChecked(true);
-                checkbox10.setChecked(true);
                 //------------------
                 //OK了家人们：
                 // 刚开始有进展的时候写了这句话
                 SharedPreferences sharedPreferences = getSharedPreferences("data2", Context.MODE_PRIVATE);
-                //String userId1=sharedPreferences.getString("ca","");
-                /*
-                int userId1 = sharedPreferences.getInt("ids", 0);
-                String userId2 = sharedPreferences.getString("ca0", "");
-                Log.e("1206-2", String.valueOf(userId1));
-                if (userId2 == null) {
-                    Log.e("1206-2.1", "userId2 is null");
-                } else {
-                    Log.e("1206-2.2", "userId2 is unknow");
-                }
-                */
 
-                //------------------
                 break;
             case R.id.action_settings2:
                 //Toast.makeText(this, "action_settings2", Toast.LENGTH_SHORT).show();
@@ -406,10 +367,6 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox4.setChecked(false);
                 checkbox5.setChecked(false);
                 checkbox6.setChecked(false);
-                checkbox7.setChecked(false);
-                checkbox8.setChecked(false);
-                checkbox9.setChecked(false);
-                checkbox10.setChecked(false);
                 //---------------------------------
                 //步骤1：创建一个SharedPreferences对象
                 SharedPreferences sharedPreferences2 = getSharedPreferences("data", Context.MODE_PRIVATE);

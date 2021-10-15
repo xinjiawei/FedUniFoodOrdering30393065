@@ -80,33 +80,6 @@
                 android:text=""
                 android:textSize="20sp" />
 
-            <CheckBox
-                android:id="@+id/checkbox7"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/checkbox8"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/checkbox9"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="20sp" />
-
-            <CheckBox
-                android:id="@+id/checkbox10"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="20sp" />
         </LinearLayout>
 
     </ScrollView>
@@ -117,7 +90,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
         android:onClick="onClickNext"
-        android:text="NEXT">
+        android:text="@string/next_button">
 
     </Button>
 </RelativeLayout>

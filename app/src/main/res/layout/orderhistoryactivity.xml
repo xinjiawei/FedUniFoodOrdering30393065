@@ -73,7 +73,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="90dp"
         android:onClick="onClickHistoryConfirm"
-        android:text="PLACE ORDER($* )">
+        android:text="@string/re_place_order">
     </Button>
 
 </RelativeLayout>

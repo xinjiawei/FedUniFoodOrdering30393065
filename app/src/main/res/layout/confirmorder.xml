@@ -8,7 +8,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Order:"
+        android:text="@string/you_order"
         android:layout_marginTop="260dp"
         android:layout_marginLeft="15dp"
         android:layout_centerHorizontal="true"
@@ -26,7 +26,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Extras:"
+        android:text="@string/extras"
         android:layout_marginTop="320dp"
         android:layout_marginLeft="15dp"
         android:textSize="20sp" />
@@ -48,18 +48,18 @@
                 android:id="@+id/meal_big"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="Large Meal ($4.99 extra)" />
+                android:text="@string/large_meal" />
 
             <RadioButton
                 android:id="@+id/meal_small"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="Small Meal($2.49 extra)" />
+                android:text="@string/no_meal" />
             <RadioButton
                 android:id="@+id/no_meal"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="No Meal" />
+                android:text="@string/no_meal" />
     </RadioGroup>
     <Button
         android:id="@+id/place_order"
@@ -69,7 +69,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="90dp"
         android:onClick="onClickNotice"
-        android:text="PLACE ORDER($* )">
+        android:text="@string/place_order">
     </Button>
 
     <Button
@@ -82,7 +82,7 @@
         android:background="#00000000"
         android:textSize="12sp"
         android:textColor="#8BC34A"
-        android:text="CANCEL"
+        android:text="@string/cancel"
         android:onClick="onClickCancel">
     </Button>
 </RelativeLayout>

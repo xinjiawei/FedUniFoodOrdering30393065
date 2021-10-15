@@ -7,6 +7,16 @@
     <string name="customise">Customise your order!</string>
     <string name="action_settings1">settings1</string>
     <string name="action_settings2">settings2</string>
+    <string name="history">HISTORY</string>
+    <string name="next_button">NEXT</string>
+    <string name="you_order">Your Order:</string>
+    <string name="extras">Extras:</string>
+    <string name="large_meal">Large Meal ($4.99 extra)</string>
+    <string name="small_meal">Small Meal($2.49 extra)</string>
+    <string name="no_meal">No Meal</string>
+    <string name="place_order">PLACE ORDER($* )</string>
+    <string name="cancel">CANCEL</string>
+    <string name="re_place_order">rePLACE ORDER($* )</string>
 
     <string name="extra_1">banana1</string>
     <string name="extra_2">banana2</string>
