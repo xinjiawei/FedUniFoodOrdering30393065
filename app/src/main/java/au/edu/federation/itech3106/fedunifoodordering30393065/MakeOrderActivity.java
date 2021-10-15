@@ -78,7 +78,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
         //check if order history
         int reorder = sharedPreferences.getInt("reorder",0);
         Log.e("1223","before:record value is set to " + reorder);
-        String ca = "";
+        String ca = "0";
         if (reorder == 1) {
             String reorderlist = sharedPreferences.getString("reorder_list", "");
             /*
@@ -89,7 +89,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 Log.e("1224", "setcheck compulete to:" + i);
                 //===========================================================
             }
-             */
+            */
             Log.e("reorder_list",reorderlist);
             //截取
             String rgex = "(\\*).*?(@)";
@@ -105,43 +105,66 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             Matcher m1 = p1.matcher(str); //进行匹配
             Matcher m2 = p2.matcher(str);
 
-            while(m1.find()) {
-                Log.e("1235-1",m1.group());//默认是group(0)
-                ca = "" +m1.group();
-                editor.putString("ca",ca);
-                editor.commit();
-                Log.e("1235-1.1",ca);
+            if(m1.find()) {
+                //0TODO 离谱，离大谱
+                //if(m1.find())原来是while(m1.find()),while在m1.find（）这里会循环两次
+                // （第二次循环m1.find（）也是true）
+                //第二次循环时ca是空字符串，会把第一次ca的存值覆盖掉，所以后边死活拿不到ca值了。
+                //奇奇怪怪，明明只有一个可匹配目标。
+                //多写Log.e...
+                Log.e("1235-1",m1.group(0));//默认是group(0)
+                ca = "" +m1.group(0);
+                //editor.putString("ca",ca);
+                //editor.commit();
+                Log.e("1235-1.1","ca instant is " + ca);
+
+
                 while(m2.find()) {
                     Log.e("1235-2",m2.group());//默认是group(0)
                     String reorderlist_ex = "," + m2.group() + ",";
                     Matcher m3 = p3.matcher(reorderlist_ex);
                     while(m3.find()) {
-                        Log.e("1235-3",m3.group());
+                        Log.e("1235-3.1",m3.group());
                         //checkbox1.setChecked(true);
 
                         switch (m3.group()) {
                             case "2131230819":
                                 checkbox1.setChecked(true);
+                                //记得写break，要不全执行一遍，采坑...
+                                break;
                             case "2131230821":
                                 checkbox2.setChecked(true);
+                                break;
                             case "2131230822":
                                 checkbox3.setChecked(true);
+                                break;
                             case "2131230823":
                                 checkbox4.setChecked(true);
+                                break;
                             case "2131230824":
                                 checkbox5.setChecked(true);
+                                break;
                             case "2131230825":
                                 checkbox6.setChecked(true);
+                                break;
                             case "2131230826":
                                 checkbox7.setChecked(true);
-                            default:
                                 break;
+                            default:
+                                Log.e("1235-3.2",m3.group());
+                                break;
+
                         }
 
 
+
                     }
+                    Log.e("1223-2.","CA in m2 is " + ca);
                 }
+
+                Log.e("1223-2.","CA in m1 is " + ca);
             }
+            Log.e("1223-2.","CA in out while is " + ca);
 
             //TODO 正则匹配获取传过来的checkbox id，获取id的数量，然后for循环选中，之后
             // 清空shareP，或者直接用intent
@@ -150,14 +173,18 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
             editor.putInt("reorder", 0);
             editor.putString("reorder_list","");
             editor.commit();
-            Log.e("1223","after:record value is set to " + reorder);
+            Log.e("1223-1","after:record value is set to " + reorder);
 
+            //获取的是顺序订单传过来的
+            //ca = sharedPreferences.getString("ca", "02");
+            //Log.e("1223-2.","CA Value " + ca);
             //最后设置就有效
             //ca = "pizza";
-            //TODO 离谱，离大谱
+        }else {
+            ca = sharedPreferences.getString("ca", "02");
+            Log.e("1223-2.","CA Value " + ca);
         }
 
-        ca = sharedPreferences.getString("ca", "burger");
         //String cas = "";
         Log.e("1220-3","now ca is :" + ca);
         //What the fuck? 异步？
@@ -195,7 +222,7 @@ public class MakeOrderActivity extends AppCompatActivity implements CompoundButt
                 checkbox2.setText("more ice2");
                 checkbox3.setText("more ice3");
                 checkbox4.setText("more ice4");
-                checkbox5.setText("more ice4");
+                checkbox5.setText("more ice5");
                 for(int i = 5;i<=9;i++) {
                     CheckBox boxid = findViewById(chk_id[i]);
                     boxid.setVisibility(View.GONE);

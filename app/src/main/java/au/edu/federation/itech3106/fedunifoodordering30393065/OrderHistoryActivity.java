@@ -137,7 +137,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
         //
         RadioGroup rg1 = (RadioGroup) findViewById(R.id.historygroup);
         rg1.setOnCheckedChangeListener(new MyRadioButtonListener2());
-
     }
 
     public void onClickHistoryConfirm (View view) {
@@ -149,14 +148,21 @@ public class OrderHistoryActivity extends AppCompatActivity {
         intent.putExtra("data","this is OrderHistoryActivity");
         //-----------------------------------------------------
         if (reorder_list != "") {
-            startActivityForResult(intent,request);
-            //-----------------------------------------------------
+
             editor.putInt("reorder",1);
             editor.commit();
+            //-----------------------------------------------------
+            startActivityForResult(intent,request);
+            //不能刷新
+            // refresh();
         }
 
     }
     //------------------------------------------------------------------
+
+    public void refresh() {
+        onCreate(null);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -211,6 +217,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     while(m2.find() && m3.find()) {
                         Log.e("1231-2.2",m2.group());
                         Log.e("1231-2.3",m3.group());
+                        //
                         RadioButton boxid = findViewById(radio_id[i1]);
                         boxid.setText(m2.group() + ",Extras:" + m3.group());
                         Log.e("1232-2", "i1 now is " + String.valueOf(i1));
